@@ -16,6 +16,7 @@ class CreateBookingCategoriesTable extends Migration
         Schema::create('booking_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('description');
             $table->timestamps();
         });
     }
