@@ -24,8 +24,9 @@ class CreateRoomsTable extends Migration
             $table->tinyInteger('is_active');
             $table->tinyInteger('is_delete');
             $table->tinyInteger('is_ready');
+            $table->bigInteger('room_cat_id')->unsigned();
             $table->timestamps();
-            $table->foreign('room_cat_id')->references('id')->on('room_categories')->onDelete('cascade');
+            $table->foreign('room_cat_id')->references('id')->on('room_categories');
 
         });
     }

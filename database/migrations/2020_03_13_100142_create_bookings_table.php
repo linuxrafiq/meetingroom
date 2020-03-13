@@ -18,11 +18,16 @@ class CreateBookingsTable extends Migration
             $table->string('name');
             $table->string('ts_booking'); // timestamp of booking date
             $table->text('description');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('room_id')->unsigned();
+            $table->bigInteger('client_id')->unsigned();
+            $table->bigInteger('booking_cat_id')->unsigned();
+
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->foreign('client_id')->references('id')->on('clients');
-            $table->foreign('booking_cat_id')->references('id')->on('booking_categories')->onDelete('cascade');
+            $table->foreign('booking_cat_id')->references('id')->on('booking_categories');
 
         });
     }
