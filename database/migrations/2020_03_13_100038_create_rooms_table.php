@@ -17,15 +17,19 @@ class CreateRoomsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('capacity');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->string('featured_image')->nullable();
+            $table->string('featured_image_title')->nullable();
+
             $table->tinyInteger('has_projector');
             $table->tinyInteger('has_dashboard');
             $table->tinyInteger('has_handicapped');
             $table->tinyInteger('is_active');
-            $table->tinyInteger('is_delete');
+            // $table->tinyInteger('is_delete');
             $table->tinyInteger('is_ready');
             $table->bigInteger('room_cat_id')->unsigned();
             $table->timestamps();
+            $table->tinyInteger('deleted');
             $table->foreign('room_cat_id')->references('id')->on('room_categories');
 
         });

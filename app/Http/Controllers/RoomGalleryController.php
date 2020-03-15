@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\RoomCategory;
+use App\RoomGallery;
 use Illuminate\Http\Request;
 
-class RoomCategoryController extends Controller
+class RoomGalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class RoomCategoryController extends Controller
      */
     public function create()
     {
-        return view('layouts/roomcat');
+        //
     }
 
     /**
@@ -35,16 +35,16 @@ class RoomCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return view('layouts/roomcat_update')->with('content', $request);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\RoomCategory  $roomCategory
+     * @param  \App\RoomGallery  $roomGallery
      * @return \Illuminate\Http\Response
      */
-    public function show(RoomCategory $roomCategory)
+    public function show(RoomGallery $roomGallery)
     {
         //
     }
@@ -52,10 +52,10 @@ class RoomCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\RoomCategory  $roomCategory
+     * @param  \App\RoomGallery  $roomGallery
      * @return \Illuminate\Http\Response
      */
-    public function edit(RoomCategory $roomCategory)
+    public function edit(RoomGallery $roomGallery)
     {
         //
     }
@@ -64,10 +64,10 @@ class RoomCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RoomCategory  $roomCategory
+     * @param  \App\RoomGallery  $roomGallery
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RoomCategory $roomCategory)
+    public function update(Request $request, RoomGallery $roomGallery)
     {
         //
     }
@@ -75,10 +75,10 @@ class RoomCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RoomCategory  $roomCategory
+     * @param  \App\RoomGallery  $roomGallery
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RoomCategory $roomCategory)
+    public function destroy(RoomGallery $roomGallery)
     {
         //
     }
