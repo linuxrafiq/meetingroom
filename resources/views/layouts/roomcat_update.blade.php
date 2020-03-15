@@ -7,15 +7,15 @@
           <div class="card-header"><h3>Update selected room category<h3></div>
 
           <div class="card-body">
-            <form id="form_id"action="{{route('roomCategory.update',$content->id)}}" method="post">
+            <form id="form_id"action="{{route('roomCategory.update',$item->id)}}" method="post">
               <div class="from-group">
                 <label for="name">Name</label>
-                <input type="text" name="name" id ="name_id" class="form-control" placeholder="Category name" value={{$content->name}}/><br>
+                <input type="text" name="name" id ="name_id" class="form-control" placeholder="Category name" value={{$item->name}}/><br>
               </div>
-              @if ($content->description != null)
+              @if ($item->description != null)
               <div class="from-group">
                 <label for="desc">Description</label>
-                <textarea class="form-control col-xs-12" rows="7" cols="100" id="description_id" name="description">{{$content->description}}</textarea>                 
+                <textarea class="form-control col-xs-12" rows="7" cols="100" id="description_id" name="description">{{$item->description}}</textarea>                 
               </div>
               @else
               <div class="from-group">

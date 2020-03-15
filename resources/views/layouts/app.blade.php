@@ -21,9 +21,8 @@
 </head>
 <body>
     <div id="app">
-       
         @include('inc.navbar')
-        <main class="py-4 container">
+        <main class="py-4 container col-md-8">
             @include('inc.messages')
             @yield('content')
         </main>

@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\RoomCategory;
 use Illuminate\Http\Request;
-
+use DB;
 class RoomCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except'=>['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,8 @@ class RoomCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $collection = RoomCategory::orderBy('updated_at','desc')->get();
+        return view('layouts.roomcat_list')->with('collection', $collection);
     }
 
     /**
@@ -35,7 +41,16 @@ class RoomCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return view('layouts/roomcat_update')->with('content', $request);
+        $this->validate($request,[
+            'name'=>'required|unique:room_categories',
+        ]);
+        $item = new RoomCategory();
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->save();
+        //return view('layouts.roomcat')->with('success', 'Created successfully');;
+        return redirect(route('roomCategory.create'))->with('success', 'Created successfully');
+
     }
 
     /**
@@ -55,9 +70,10 @@ class RoomCategoryController extends Controller
      * @param  \App\RoomCategory  $roomCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(RoomCategory $roomCategory)
+    public function edit($id)
     {
-        //
+        $item = RoomCategory::find($id);
+        return view('layouts.roomcat_update')->with('item', $item);
     }
 
     /**
@@ -67,9 +83,16 @@ class RoomCategoryController extends Controller
      * @param  \App\RoomCategory  $roomCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RoomCategory $roomCategory)
+    public function update(Request $request, $id)
     {
-        //
+        $item = RoomCategory::find($id);
+        $item->name=$request->name;
+        $item->description=$request->description;
+        $item->save();
+        //return view('layouts.roomcat')->with('success', 'Created successfully');;
+        return redirect(route('roomCategory.index'))->with('success', 'Updated successfully');
+
+
     }
 
     /**
