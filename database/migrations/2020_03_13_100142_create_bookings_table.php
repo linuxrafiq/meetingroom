@@ -24,7 +24,7 @@ class CreateBookingsTable extends Migration
             $table->bigInteger('booking_cat_id')->unsigned();
 
             $table->timestamps();
-            $table->tinyInteger('deleted');
+            $table->tinyInteger('deleted')->default(0);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('room_id')->references('id')->on('rooms');
             $table->foreign('client_id')->references('id')->on('clients');

@@ -17,7 +17,7 @@ class CreateRoomCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->tinyInteger('deleted');
+            $table->tinyInteger('deleted')->default(0);
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class CreateRoomGalleriesTable extends Migration
             $table->string('image');
             $table->bigInteger('room_id')->unsigned();
             $table->timestamps();
-            $table->tinyInteger('deleted');
+            $table->tinyInteger('deleted')->default(0);
             $table->foreign('room_id')->references('id')->on('rooms');
 
         });

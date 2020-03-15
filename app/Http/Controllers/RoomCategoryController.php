@@ -19,7 +19,7 @@ class RoomCategoryController extends Controller
      */
     public function index()
     {
-        $collection = RoomCategory::orderBy('updated_at','desc')->get();
+        $collection = RoomCategory::orderBy('updated_at','desc')->where('deleted', 0)->get();
         return view('layouts.roomcat_list')->with('collection', $collection);
     }
 
@@ -101,8 +101,12 @@ class RoomCategoryController extends Controller
      * @param  \App\RoomCategory  $roomCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RoomCategory $roomCategory)
+    public function destroy($id)
     {
-        //
+        DB::table('room_categories')
+            ->where('id', 3)
+            ->update(['deleted' => 1]);
+        return redirect(route('roomCategory.index'))->with('success', 'Deleted successfully');
+
     }
 }

@@ -18,7 +18,7 @@ class CreateBookingCategoriesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
-            $table->tinyInteger('deleted');
+            $table->tinyInteger('deleted')->default(0);
         });
     }
 
