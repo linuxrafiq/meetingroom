@@ -15,7 +15,6 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->integer('capacity');
             $table->text('description')->nullable();
             $table->string('featured_image')->nullable();
@@ -27,10 +26,10 @@ class CreateRoomsTable extends Migration
             $table->tinyInteger('is_active');
             // $table->tinyInteger('is_delete');
             $table->tinyInteger('is_ready');
-            $table->bigInteger('room_cat_id')->unsigned();
+            $table->bigInteger('category')->unsigned();
             $table->timestamps();
             $table->tinyInteger('deleted')->default(0);
-            $table->foreign('room_cat_id')->references('id')->on('room_categories');
+            $table->foreign('category')->references('id')->on('room_categories');
 
         });
     }

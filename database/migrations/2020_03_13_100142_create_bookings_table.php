@@ -15,20 +15,19 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('ts_booking'); // timestamp of booking date
             $table->text('description')->nullable();
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('room_id')->unsigned();
-            $table->bigInteger('client_id')->unsigned();
-            $table->bigInteger('booking_cat_id')->unsigned();
+            $table->bigInteger('user')->unsigned();
+            $table->bigInteger('room')->unsigned();
+            $table->bigInteger('client')->unsigned();
+            $table->bigInteger('category')->unsigned();
 
             $table->timestamps();
             $table->tinyInteger('deleted')->default(0);
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('room_id')->references('id')->on('rooms');
-            $table->foreign('client_id')->references('id')->on('clients');
-            $table->foreign('booking_cat_id')->references('id')->on('booking_categories');
+            $table->foreign('user')->references('id')->on('users');
+            $table->foreign('room')->references('id')->on('rooms');
+            $table->foreign('client')->references('id')->on('clients');
+            $table->foreign('category')->references('id')->on('booking_categories');
 
         });
     }
