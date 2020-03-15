@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
 <div class="row justify-content-center">
@@ -25,7 +24,7 @@
                 </div>
               @endforeach
           @else
-          <h3>You have no room category recorded.</h3>
+          <p>You have no room category recorded.</p>
           @endif
         </div>
     </div>
