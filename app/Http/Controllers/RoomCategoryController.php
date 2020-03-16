@@ -49,7 +49,7 @@ class RoomCategoryController extends Controller
         $item->description = $request->description;
         $item->save();
         //return view('layouts.roomcat')->with('success', 'Created successfully');;
-        return redirect(route('roomCategory.create'))->with('success', 'Created successfully');
+        return redirect(route('roomCategory.index'))->with('success', 'Created successfully');
 
     }
 

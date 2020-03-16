@@ -67,11 +67,11 @@ class RoomController extends Controller
             'category' => $request->category,
             'capacity' => $request->capacity,
             'description' => $request->description,
-            'has_projector' => $projector,
-            'has_dashboard' => $dashboard,
-            'has_handicapped' => $handicapped,
-            'is_active' => $active,
-            'is_ready' => $ready,
+            'projector' => $projector,
+            'dashboard' => $dashboard,
+            'handicapped' => $handicapped,
+            'active' => $active,
+            'ready' => $ready,
             'feature_image' => $feature_image,
         ]);
 
@@ -151,14 +151,14 @@ class RoomController extends Controller
         $item->category = $request->category;
         $item->capacity = $request->capacity;
         $item->description = $request->description;
-        $item->has_projector = $projector;
-        $item->has_dashboard = $dashboard;
-        $item->has_handicapped = $handicapped;
+        $item->projector = $projector;
+        $item->dashboard = $dashboard;
+        $item->handicapped = $handicapped;
         if(strlen($feature_image)>0){
             $item->feature_image = $feature_image;
         }
-        $item->is_active = $active;
-        $item->is_ready = $ready;
+        $item->active = $active;
+        $item->ready = $ready;
         $item->save();
         //dd($request->deletedImage);
         if ($request->deletedImage) {

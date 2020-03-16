@@ -21,12 +21,12 @@ class CreateRoomsTable extends Migration
             $table->string('feature_image')->nullable();
             $table->string('featured_image_title')->nullable();
 
-            $table->tinyInteger('has_projector');
-            $table->tinyInteger('has_dashboard');
-            $table->tinyInteger('has_handicapped');
-            $table->tinyInteger('is_active');
+            $table->tinyInteger('projector');
+            $table->tinyInteger('dashboard');
+            $table->tinyInteger('handicapped');
+            $table->tinyInteger('active');
             // $table->tinyInteger('is_delete');
-            $table->tinyInteger('is_ready');
+            $table->tinyInteger('ready');
             $table->bigInteger('category')->unsigned();
             $table->timestamps();
             $table->tinyInteger('deleted')->default(0);

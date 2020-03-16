@@ -7,6 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $fillable = ['name','capacity','description','feature_image',
-    'has_projector','has_dashboard','has_handicapped','is_active','is_ready',
-    'category'];
+    'projector','dashboard','handicapped','active','ready','category'];
 }

@@ -49,7 +49,7 @@ class BookingCategoryController extends Controller
         $item->description = $request->description;
         $item->save();
         //return view('layouts.roomcat')->with('success', 'Created successfully');;
-        return redirect(route('bookingCategory.create'))->with('success', 'Created successfully');
+        return redirect(route('bookingCategory.index'))->with('success', 'Created successfully');
 
     }
 

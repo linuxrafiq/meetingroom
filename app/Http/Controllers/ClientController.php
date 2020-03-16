@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use Illuminate\Http\Request;
+use DB;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except'=>['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $collection = Client::orderBy('updated_at','desc')->where('deleted', 0)->get();
+        return view('layouts.client_list')->with('collection', $collection);
+   
     }
 
     /**
@@ -24,7 +31,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts/client');
     }
 
     /**
@@ -35,7 +42,23 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'company'=>'required',
+
+        ]);
+
+        $name= $request->has('projector')?:null;
+        $email=$request->has('dashboard')?:null;
+        $phone=$request->has('handicapped')?:null;
+        $room=Client::create([
+            'name' => $request->name,
+            'email' => $email,
+            'phone' => $phone,
+            'company' => $request->company,
+        ]);
+        //return view('layouts.roomcat')->with('success', 'Created successfully');;
+        return redirect(route('client.index'))->with('success', 'Created successfully');
+
     }
 
     /**

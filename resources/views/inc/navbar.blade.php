@@ -23,6 +23,7 @@
               <a class="dropdown-item" href="{{route('roomCategory.create')}}">Create Room Category</a> 
               <a class="dropdown-item" href="{{route('bookingCategory.create')}}">Create Booking Category</a> 
               <a class="dropdown-item" href="{{route('room.create')}}">Create Room</a> 
+              <a class="dropdown-item" href="{{route('client.create')}}">Create Client</a> 
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -33,6 +34,8 @@
               <a class="dropdown-item" href="{{route('roomCategory.index')}}">Room Categories</a> 
               <a class="dropdown-item" href="{{route('bookingCategory.index')}}">Booking Categories</a> 
               <a class="dropdown-item" href="{{route('room.index')}}">Rooms</a> 
+              <a class="dropdown-item" href="{{route('client.index')}}">Clients</a> 
+
             </div>
           </li>
           <li class="nav-item dropdown">
