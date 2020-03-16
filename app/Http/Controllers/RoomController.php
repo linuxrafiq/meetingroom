@@ -6,7 +6,7 @@ use App\Room;
 use App\RoomCategory;
 use App\RoomGallery;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\File;
 class RoomController extends Controller
 {
     /**
@@ -123,9 +123,66 @@ class RoomController extends Controller
      * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'category' => 'required',
+            'capacity' => 'required',
+            'description' => 'required',
+            'feature_image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10240',
+        ]);
+
+        $projector= $request->has('projector')?:0;
+        $dashboard=$request->has('dashboard')?:0;
+        $handicapped=$request->has('handicapped')?:0;
+        $active=$request->has('active')?:0;
+        $ready=$request->has('ready')?:0;
+
+        $feature_image ="";
+        if ($request->hasfile('feature_image')) {
+            $feature_image = mt_rand() . time() . " " . $request->file('feature_image')->getClientOriginalName();
+            $request->file('feature_image')->move(public_path('/images/room_feature_image'), $feature_image);
+        }
+
+        $item = Room::find($id);
+
+        $item->name = $request->name;
+        $item->category = $request->category;
+        $item->capacity = $request->capacity;
+        $item->description = $request->description;
+        $item->has_projector = $projector;
+        $item->has_dashboard = $dashboard;
+        $item->has_handicapped = $handicapped;
+        if(strlen($feature_image)>0){
+            $item->feature_image = $feature_image;
+        }
+        $item->is_active = $active;
+        $item->is_ready = $ready;
+        $item->save();
+        //dd($request->deletedImage);
+        if ($request->deletedImage) {
+            $deletedimages = $request->deletedImage;
+            $data = explode(",", $deletedimages);
+            foreach ($data as $d) {
+                $images = RoomGallery::where('id', '=', $d)->first();
+                $images->delete();
+                $filename = public_path() . '/images/room_gallery_image/' . $images->image_path;
+                File::delete($filename);
+            }
+        }
+        if ($files = $request->file('gallery_image')) {
+            foreach ($files as $file) {
+                $image_path = mt_rand() . time() . " " . $file->getClientOriginalName();
+                $file->move(public_path('/images/room_gallery_image'), $image_path);
+                RoomGallery::create([
+
+                    'image' => $image_path,
+                    'room' => $item->id,
+                ]);
+            }
+        }
+        return redirect()->route('room.index')->with('success', 'Room  updated successfully.');
     }
 
     /**
@@ -134,8 +191,12 @@ class RoomController extends Controller
      * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Room $room)
+    public function destroy($id)
     {
-        //
+        DB::table('rooms')
+            ->where('id', $id)
+            ->update(['deleted' => 1]);
+        return redirect(route('room.index'))->with('success', 'Deleted successfully');
+
     }
 }

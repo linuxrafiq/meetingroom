@@ -10,7 +10,7 @@
             <form id="form_id"action="{{route('roomCategory.update',$item->id)}}" method="post">
               <div class="from-group">
                 <label for="name">Name</label>
-                <input type="text" name="name" id ="name_id" class="form-control" placeholder="Category name" value={{$item->name}}/><br>
+                <input type="text" name="name" id ="name_id" class="form-control" placeholder="Category name" value='{{$item->name}}'/><br>
               </div>
               @if ($item->description != null)
               <div class="from-group">

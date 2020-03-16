@@ -6,10 +6,10 @@
           <div class="card-header"><h3>Update selected room<h3></div>
 
           <div class="card-body">
-            <form id="form_id" action="{{route('room.update',$item->id)}}" enctype="multipart/form-data">
+            <form id="form_id" method="post" action="{{route('room.update',$item->id)}}" enctype="multipart/form-data">
               <div class="from-group">
                 <label for="name">Name</label>
-                <input type="text" name="name" id ="name_id" class="form-control" placeholder="Name" value={{$item->name}}/><br>
+                <input type="text" name="name" id ="name_id" class="form-control" placeholder="Name" value='{{$item->name}}'/><br>
               </div>
               <div class="form-group">
                 <select name="category" id="category_id" class="form-control input-lg dynamic" >
@@ -18,14 +18,14 @@
                      @if($cat->id==$item->category)
                      <option value="{{ $cat->id}}" selected>{{ $cat->name }}</option>
                      @else
-                     <option value="{{ $cat->id}}">{{ $cat->title}}</option>
+                     <option value="{{ $cat->id}}">{{ $cat->name}}</option>
                      @endif
                 @endforeach
                </select>
             </div> 
             <div class="from-group">
                 <label for="capacity">Capacity</label>
-                <input type="text" name="capacity" id ="capacity_id" class="form-control" placeholder="Capacity" value={{$item->capacity}}/><br>
+                <input type="number" name="capacity" id ="capacity_id" class="form-control" placeholder="Capacity" value='{{$item->capacity}}'/><br>
               </div>
             @if ($item->description != null)
             <div class="from-group">
@@ -115,10 +115,12 @@
                 <img src="{{asset('images/room_gallery_image/'.$img->image)}}" width="120px"/>
                 <button class="btn btn-sm btn-danger remove_field" id="{{$img->id}}"  >Remove Image</button>
                 </div>
+                <br>
                 @endforeach
                 @endif
             </div>
               <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+              <input type="hidden"  name="deletedImage" id="deletedImages">
               @method('PUT')
               <br>
               <div class="from-group">
