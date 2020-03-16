@@ -60,7 +60,7 @@ class RoomController extends Controller
             $feature_image = mt_rand() . time() . " " . $request->file('feature_image')->getClientOriginalName();
             $request->file('feature_image')->move(public_path('/images/room_feature_image'), $feature_image);
         }
-           
+          // dd($feature_image);
         //dd($request->all());
         $room=Room::create([
             'name' => $request->name,

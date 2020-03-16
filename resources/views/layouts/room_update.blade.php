@@ -9,14 +9,14 @@
             <form id="form_id" action="{{route('room.update',$item->id)}}" enctype="multipart/form-data">
               <div class="from-group">
                 <label for="name">Name</label>
-                <input type="text" name="name" id ="name_id" class="form-control" placeholder="Name" value={{$item->Name}}/><br>
+                <input type="text" name="name" id ="name_id" class="form-control" placeholder="Name" value={{$item->name}}/><br>
               </div>
               <div class="form-group">
                 <select name="category" id="category_id" class="form-control input-lg dynamic" >
                 <option value="">Select Category</option>
                 @foreach ($categories as $cat)
                      @if($cat->id==$item->category)
-                     <option value="{{ $cat->id}}" selected>{{ $cat->title }}</option>
+                     <option value="{{ $cat->id}}" selected>{{ $cat->name }}</option>
                      @else
                      <option value="{{ $cat->id}}">{{ $cat->title}}</option>
                      @endif
@@ -25,7 +25,7 @@
             </div> 
             <div class="from-group">
                 <label for="capacity">Capacity</label>
-                <input type="number" name="capacity" id ="capacity_id" class="form-control" placeholder="Capacity" value={{$item->capacity}}/><br>
+                <input type="text" name="capacity" id ="capacity_id" class="form-control" placeholder="Capacity" value={{$item->capacity}}/><br>
               </div>
             @if ($item->description != null)
             <div class="from-group">
@@ -112,7 +112,7 @@
                 @if($gallery_images)
                 @foreach($gallery_images as $img)
                 <div>
-                <img src="{{asset('images/product_gallery_image/'.$img->image)}}" width="120px"/>
+                <img src="{{asset('images/room_gallery_image/'.$img->image)}}" width="120px"/>
                 <button class="btn btn-sm btn-danger remove_field" id="{{$img->id}}"  >Remove Image</button>
                 </div>
                 @endforeach
@@ -130,4 +130,36 @@
   </div>
 </div>
   
+@endsection
+
+@section('script')
+<script>
+$(document).ready(function(){
+            $(".remove_field").click(function(e){
+                e.preventDefault();
+               // debugger;
+                var idofButton=$(this).attr('id');
+                var buttonfield=$('#'+idofButton).parent();
+                buttonfield.remove();
+                var imageIds=$('#deletedImages').val();
+                 if(imageIds == '')
+                 {
+                     $('#deletedImages').val(imageIds+ idofButton);
+                 }
+                 else
+                 {
+                     $('#deletedImages').val(imageIds+','+idofButton);
+
+                 }
+
+
+                //$('#'+idofButton).parent.remove();
+            });
+
+            function removeDiv($field) {
+                $field.preventDefault();
+                $field.parent.remove();
+            }
+        });
+</script>
 @endsection
