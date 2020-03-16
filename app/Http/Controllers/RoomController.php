@@ -16,7 +16,9 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        $collection = Room::orderBy('updated_at','desc')->where('deleted', 0)->get();
+        return view('layouts.room_list')->with('collection', $collection);
+ 
     }
 
     /**
@@ -39,6 +41,7 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'name' => 'required',
             'category' => 'required',
             'capacity' => 'required',
             'description' => 'required',
@@ -52,14 +55,15 @@ class RoomController extends Controller
         $active=$request->has('active')?:0;
         $ready=$request->has('ready')?:0;
 
+        $feature_image ="";
         if ($request->hasfile('feature_image')) {
             $feature_image = mt_rand() . time() . " " . $request->file('feature_image')->getClientOriginalName();
             $request->file('feature_image')->move(public_path('/images/room_feature_image'), $feature_image);
-        } else
-            $feature_image = '';
-
+        }
+           
         //dd($request->all());
         $room=Room::create([
+            'name' => $request->name,
             'category' => $request->category,
             'capacity' => $request->capacity,
             'description' => $request->description,
@@ -77,12 +81,12 @@ class RoomController extends Controller
                 $file->move(public_path('/images/room_gallery_image'), $image_path);
                 RoomGallery::create([
                     'image' => $image_path,
-                    'room_id' => $room->id,
+                    'room' => $room->id,
                 ]);
             }
         }
         
-       // return redirect()->route('room.index')->with('success', 'Room  created successfully.');
+        return redirect()->route('room.index')->with('success', 'Room  created successfully.');
     }
 
     /**
@@ -102,9 +106,14 @@ class RoomController extends Controller
      * @param  \App\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function edit(Room $room)
+    public function edit($id)
     {
-        //
+        $categories = RoomCategory::where('deleted', '=', 0)->get();
+        $item = Room::find($id);
+        $gallery_images = RoomGallery::where('room', '=', $id)
+        ->where('deleted', '=', 0)->get();
+        //dd($item->all());
+        return view('layouts.room_update', compact(['categories', 'item', 'gallery_images']));
     }
 
     /**

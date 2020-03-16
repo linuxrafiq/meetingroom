@@ -5,15 +5,19 @@
     <div class="card-header"><h3>Create a new room<h3></div>
     <div class="card-body">
       @if (count($categories)>0)
-      <form id="form_id" action="{{route('room.store')}}" method="post" enctype="multipart/form-data">
-        <div class="from-group">
-          <select name="category" id="category_id" class="form-control input-lg">
-              <option value="">Select Category</option>
-              @foreach ($categories as $cat)
-                  <option value={{$cat->id}} >{{ $cat->name}}</option>
-              @endforeach
-          </select>
-      </div>
+        <form id="form_id" action="{{route('room.store')}}" method="post" enctype="multipart/form-data">
+          <div class="from-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id ="name_id" class="form-control" placeholder="Name"/><br>
+          </div>
+          <div class="from-group">
+            <select name="category" id="category_id" class="form-control input-lg">
+                <option value="">Select Category</option>
+                @foreach ($categories as $cat)
+                    <option value={{$cat->id}} >{{ $cat->name}}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="from-group">
           <label for="capacity">Capacity</label>
           <input type="number" name="capacity" id ="capacity_id" class="form-control" placeholder="Capacity"/><br>

@@ -17,10 +17,10 @@ class CreateRoomGalleriesTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('image');
-            $table->bigInteger('room_id')->unsigned();
+            $table->bigInteger('room')->unsigned();
             $table->timestamps();
             $table->tinyInteger('deleted')->default(0);
-            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->foreign('room')->references('id')->on('rooms');
 
         });
     }

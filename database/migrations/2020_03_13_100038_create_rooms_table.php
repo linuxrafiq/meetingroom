@@ -16,8 +16,9 @@ class CreateRoomsTable extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->integer('capacity');
+            $table->string('name');
             $table->text('description')->nullable();
-            $table->string('featured_image')->nullable();
+            $table->string('feature_image')->nullable();
             $table->string('featured_image_title')->nullable();
 
             $table->tinyInteger('has_projector');

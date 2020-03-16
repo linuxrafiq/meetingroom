@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomGallery extends Model
 {
-    protected $fillable=['image', 'room_id'];
+    protected $fillable=['image', 'room'];
 }
