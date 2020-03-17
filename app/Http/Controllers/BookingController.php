@@ -7,6 +7,7 @@ use App\RoomCategory;
 use App\BookingCategory;
 use App\Client;
 use Illuminate\Http\Request;
+use DB;
 
 class BookingController extends Controller
 {
@@ -47,13 +48,25 @@ class BookingController extends Controller
             'room' => 'required',
             'booking_date' => 'required',
         ]);
-        
-        $clientId=null;
+    
         if($request->client_form=="show"){ 
             $request->validate([
                 'company' => 'required',
             ]);
            
+        }
+        
+        $booking = DB::table('bookings')
+        ->where('category', $request->category)
+        ->where('room', $request->room)
+        ->where('booking_date', $request->booking_date)
+        ->get()->first();
+
+        if($booking != null){
+            return redirect()->route('booking.create')->with('error', 'This room booked already for selected date.');
+        }
+        $clientId=null;
+        if($request->client_form=="show"){ 
             $client=Client::create([
                 'name' => $request->name,
                 'company' => $request->company,

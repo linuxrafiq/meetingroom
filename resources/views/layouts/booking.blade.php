@@ -91,7 +91,7 @@
                             <input type="number" name="phone" id ="phone" class="form-control" placeholder="Phone number"/><br>
                           </div> 
                           <div class="from-group">
-                            <input type="hidden"  name="client_form" id="client_form" value="show">
+                            <input type="hidden"  name="client_form" id="client_form" value="hide">
                           </div>
                       </div>
                   </div>
