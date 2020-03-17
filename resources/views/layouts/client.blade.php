@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="row justify-content-center">
-  <div class="card ">
+  <div class="card " style="width:100%">
     <div class="card-header"><h3>Create a new client<h3></div>
-    <div class="card-body">
+    <div class="card-body col-md-12" >
       <form id="form_id" action="{{route('client.store')}}" method="post">
         <div class="from-group">
           <label for="name">Name</label>
@@ -11,7 +11,7 @@
         </div>
         <div class="from-group">
           <label for="company">Company</label>
-          <input type="text" name="company" id ="company_id" class="form-control" placeholder="Company Name"/><br>
+          <input type="text" name="company"  id ="company_id" class="form-control" placeholder="Company Name"/><br>
         </div>
         <div class="from-group">
           <label for="email">Email</label>

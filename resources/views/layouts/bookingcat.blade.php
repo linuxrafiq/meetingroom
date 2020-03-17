@@ -12,7 +12,7 @@
         </div>
         <div class="from-group">
           <label for="desc">Description</label>
-          <textarea class="form-control col-xs-12" rows="7" cols="100" id="description_id" name="description" placeholder="Write a description"></textarea>                 
+          <textarea class="form-control " rows="7" cols="100" id="description_id" name="description" placeholder="Write a description"></textarea>                 
         </div>
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
         <br>

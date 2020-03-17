@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\RoomCategory;
+use App\BookingCategory;
+use App\Client;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -24,7 +27,10 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        $room_categories = RoomCategory::where('deleted', '=', 0)->get();
+        $booking_categories = RoomCategory::where('deleted', '=', 0)->get();
+        $clients = Client::where('deleted', '=', 0)->get();
+        return view('layouts.booking', compact(['room_categories', 'booking_categories', 'clients']));
     }
 
     /**

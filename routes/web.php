@@ -23,6 +23,7 @@ Route::resource('client', 'ClientController');
 Route::resource('booking', 'BookingController');
 Route::resource('roomCategory', 'RoomCategoryController');
 Route::resource('room', 'RoomController');
+Route::post('/category/rooms', 'RoomCategoryController@fetchRooms')->name('category.rooms');
 
 
 

@@ -8,4 +8,8 @@ class Room extends Model
 {
     protected $fillable = ['name','capacity','description','feature_image',
     'projector','dashboard','handicapped','active','ready','category'];
+
+    public function category(){
+        return $this->belongsTo('App\RoomCategory');
+    }
 }
