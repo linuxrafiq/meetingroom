@@ -15,7 +15,7 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('ts_booking'); // timestamp of booking date
+            $table->string('booking_date');
             $table->text('description')->nullable();
             $table->bigInteger('user')->unsigned();
             $table->bigInteger('room')->unsigned();

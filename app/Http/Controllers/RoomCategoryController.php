@@ -54,7 +54,7 @@ class RoomCategoryController extends Controller
     }
 
     public function fetchRooms(Request $request){
-        $rooms = RoomCategory::find($request->value)->rooms;
+        $rooms = RoomCategory::find($request->room_category)->rooms;
          $result="<option value=''>Select Room</option>";
         for( $i = 0; $i < count($rooms); $i++){
             $result.='<option value="'.$rooms[$i]->id.'">'.$rooms[$i]->name.'</option>';

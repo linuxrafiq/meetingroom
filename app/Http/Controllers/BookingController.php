@@ -28,7 +28,7 @@ class BookingController extends Controller
     public function create()
     {
         $room_categories = RoomCategory::where('deleted', '=', 0)->get();
-        $booking_categories = RoomCategory::where('deleted', '=', 0)->get();
+        $booking_categories = BookingCategory::where('deleted', '=', 0)->get();
         $clients = Client::where('deleted', '=', 0)->get();
         return view('layouts.booking', compact(['room_categories', 'booking_categories', 'clients']));
     }
@@ -41,7 +41,44 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $request->validate([
+            'category' => 'required',
+            'room' => 'required',
+            'booking_date' => 'required',
+        ]);
+        
+        $clientId=null;
+        if($request->client_form=="show"){ 
+            $request->validate([
+                'company' => 'required',
+            ]);
+           
+            $client=Client::create([
+                'name' => $request->name,
+                'company' => $request->company,
+                'email' => $request->email,
+                'phone' => $request->phone
+            ]);
+            $clientId=$client->id;
+        }else{
+            $request->validate([
+                'client' => 'required',
+            ]);
+            $clientId=$request->client;
+        }
+
+        $booking=Booking::create([
+            'category' => $request->category,
+            'room' => $request->room,
+            'booking_date' => $request->booking_date,
+            'description' => $request->description,
+            'client' => $clientId,
+            'user' => auth()->user()->id
+        ]);
+
+        return redirect()->route('booking.index')->with('success', 'Room booked successfully.');
+
     }
 
     /**
